@@ -20,7 +20,11 @@
             <h2>お問い合わせ</h2>
             <p>連絡等がある場合は、以下フォームかメアドを使用してお気軽にお問い合わせください！</p>
             <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:toki.zeno.0508@gmail.com">toki.zeno.0508@gmail.com</a></p>
-            <form id="contact-form" class="contact-form">
+            <form id="contact-form" class="contact-form" method="POST" action="https://api.web3forms.com/submit">
+                <input type="hidden" name="access_key" value="c87eeeef-1eee-4bb1-9a7e-2c4ef9881b2f">
+                <input type="hidden" name="subject" value="新しいお問い合わせメッセージ">
+                <input type="hidden" name="from_name" value="ポートフォリオお問い合わせ">
+                <input type="hidden" name="redirect" value="https://toki-0508.github.io/araitomoki-portfolio/contact.html?success=true">
                 <div class="form-group">
                     <label for="name">お名前</label>
                     <input type="text" id="name" name="name" required>
@@ -34,6 +38,7 @@
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">送信する</button>
+                <div id="result" style="margin-top: 15px; display: none; padding: 10px; border-radius: 8px; text-align: center;"></div>
             </form>
         </section>
     </main>

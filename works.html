@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成果物 - アライトモキのポートフォリオ</title>
+    <link rel="stylesheet" href="src/index.css">
+</head>
+<body>
+    <header>
+        <h1>アライトモキのポートフォリオ</h1>
+    </header>
+    <nav>
+        <a href="index.html">ホーム</a>
+        <a href="works.html" class="active">おもちゃ箱(成果物)</a>
+        <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <main>
+        <section>
+            <h2>成果物</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>webメモ</h3>
+                    <p>このサービスは、どのデバイスでもログインさえすれば無料で簡単にメモを書く、見ることができるのでスマホにある既存のものだと使いづらいなという個人的なニーズを解決するためだけに作りました。</p>
+                    <p><strong>使用技術:</strong> firebase, TypeScript, tailwind</p>
+                    <a href="#" data-target="modal-a">詳細を見る</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>リンク</h3>
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="works.html">成果物</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>ソーシャル</h3>
+                <div class="social-links">
+                    <a href="https://github.com/toki-0508"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/智己-新井-a71a35387"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><i class="fas fa-copyright"></i> 2026 AraiTomoki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-a" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>webメモ</h2>
+            <p>実装されている機能は基本のメモに機能に加え、タグ付け、検索、共有、txt形式での書き出しなどがあります。ユーザーは自分のメモを簡単に整理し、必要なときにすぐにアクセスできます。</p>
+            <p><strong>使用技術:</strong> firebase, TypeScript, tailwind</p>
+            <p><strong>特徴:</strong> ファイル単位,メモ単位での共有、ユーザー認証</p>
+            <p><strong>リンク:</strong> <a href="https://web-memo-4ea25.web.app/" target="_blank">Webメモ</a></p>
+        </div>
+    </div>
+    <script src="src/index.js"></script>
+</body>
+</html>

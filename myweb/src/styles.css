@@ -1,0 +1,239 @@
+/* Google Fonts: Noto Sans JP & Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/* ベーススタイル */
+body {
+    font-family: 'Noto Sans JP', 'Roboto', 'Arial', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f4f4f9 60%, #e0e7ff 100%);
+    color: #222;
+}
+
+header {
+    background: #232946;
+    color: #fff;
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(35, 41, 70, 0.08);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: #a7c7e7;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #fff;
+    background: #3e497a;
+}
+
+.social-links {
+    margin: 1.2rem 0 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.social-links a {
+    color: #a7c7e7;
+    font-size: 1.7rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: #fff;
+}
+
+.profile-pic {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #a7c7e7;
+    margin: 1.2rem auto 0.5rem auto;
+    display: block;
+    box-shadow: 0 4px 16px rgba(35, 41, 70, 0.10);
+}
+
+/* メインセクション */
+main {
+    padding: 2.5rem 1rem;
+    max-width: 900px;
+    margin: 2.5rem auto 1.5rem auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(35, 41, 70, 0.10);
+}
+
+section h2 {
+    margin-top: 0;
+    color: #232946;
+    border-bottom: 2px solid #a7c7e7;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* プロジェクトカード */
+.projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.project-card {
+    background: #f4f4f9;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(35, 41, 70, 0.08);
+    padding: 1.5rem;
+    flex: 1 1 260px;
+    min-width: 260px;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(35, 41, 70, 0.13);
+}
+
+.project-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    height: 120px;
+    background: #e0e7ff;
+}
+
+.project-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+    color: #232946;
+}
+
+.project-card p {
+    font-size: 0.98rem;
+    margin: 0 0 1rem 0;
+}
+
+.project-card a {
+    color: #61dafb;
+    text-decoration: underline;
+    font-size: 0.97rem;
+    margin-right: 1rem;
+}
+
+/* フォームスタイル */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+form label {
+    font-weight: bold;
+    color: #232946;
+}
+
+form input, form textarea {
+    padding: 0.9rem;
+    font-size: 1rem;
+    border: 1.5px solid #a7c7e7;
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #f4f4f9;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #232946;
+    box-shadow: 0 0 8px rgba(97, 218, 251, 0.18);
+}
+
+form button {
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    background: #232946;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background: #61dafb;
+    color: #232946;
+    transform: scale(1.04);
+}
+
+/* フッタースタイル */
+footer {
+    text-align: center;
+    padding: 1.2rem 0 1rem 0;
+    background: #232946;
+    color: #fff;
+    margin-top: 2.5rem;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    font-size: 0.98rem;
+}
+
+.Who {
+    padding: 25px 30px;
+    font-size: 20px;
+    background: #e0e7ff;
+    border-radius: 12px;
+    margin: 1.5rem auto 0 auto;
+    max-width: 400px;
+    box-shadow: 0 2px 8px rgba(35, 41, 70, 0.07);
+}
+
+@media (max-width: 700px) {
+    main {
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+    }
+    .projects-list {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .project-card {
+        max-width: 100%;
+    }
+    .Who {
+        max-width: 95vw;
+    }
+}

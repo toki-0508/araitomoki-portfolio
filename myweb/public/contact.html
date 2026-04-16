@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイデア募集！</title>
+    <link rel="stylesheet" href="../src/styles.css">
+</head>
+<body>
+    <header>
+        <h1>お問い合わせ</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="projects.html">プロジェクト</a></li>
+                <li><a href="contact.html" class="active">お問い合わせ</a></li>
+            </ul>
+        </nav>
+        <div class="social-links">
+            <a href="https://github.com/toki-0508" target="_blank" title="GitHub"><span aria-hidden="true">GitHub</span></a>
+            <a href="https://x.com/zeno_arai" target="_blank" title="X(Twitter)"><span aria-hidden="true">Twitter</span></a>
+            <a href="mailto:toki.zeno.0508@email.com" title="メール"><span aria-hidden="true">E-mail</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section id="contact">
+            <h2>ご意見・依頼内容を送信してください</h2>
+            <form id="ideaForm" action="http://localhost:3000/submit-idea" method="POST">
+                <label for="name">お名前:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">メールアドレス:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="idea">アイデア:</label>
+                <textarea id="idea" name="idea" rows="5" required></textarea>
+                
+                <button type="submit">送信</button>
+            </form>
+            <div id="thanksMessage" style="display:none; margin-top:2rem; color:#232946; font-size:1.2rem; font-weight:bold; text-align:center;">アイデアの送信ありがとうございました！</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 新井智己</p>
+    </footer>
+    <script>
+    document.getElementById('ideaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        this.style.display = 'none';
+        document.getElementById('thanksMessage').style.display = 'block';
+    });
+    </script>
+</body>
+</html>

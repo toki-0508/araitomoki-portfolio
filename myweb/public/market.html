@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マーケット - 3Dデータ販売</title>
+    <link rel="stylesheet" href="../src/styles.css">
+    <link rel="stylesheet" href="../src/market.css">
+    <!-- Stripe CDN -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <header>
+        <h1>ARAIのホームぺージ</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="projects.html">プロジェクト</a></li>
+                <li><a href="market.html" class="active">マーケット</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+        <img src="/src/images/profile.png" alt="プロフィール画像" class="profile-pic" />
+        <div class="social-links">
+            <a href="https://github.com/toki-0508" target="_blank" title="GitHub"><span aria-hidden="true">GitHub</span></a>
+            <a href="https://x.com/zeno_arai" target="_blank" title="X(Twitter)"><span aria-hidden="true">Twitter</span></a>
+            <a href="mailto:toki.zeno.0508@email.com" title="メール"><span aria-hidden="true">E-mail</span></a>
+        </div>
+    </header>
+
+    <main id="market-main">
+        <!-- マーケットヘッダー -->
+        <section class="market-hero">
+            <h2>3Dデータマーケット</h2>
+            <p>高品質な3Dモデル、アセット、データを販売しています</p>
+        </section>
+
+        <!-- 認証状態表示 -->
+        <div class="auth-section" id="authSection">
+            <button id="authBtn" class="btn btn-primary">ログイン</button>
+            <span id="userInfo" style="display: none;">
+                ユーザー: <strong id="userName"></strong>
+                <button id="logoutBtn" class="btn btn-secondary btn-sm">ログアウト</button>
+            </span>
+        </div>
+
+        <!-- 検索・フィルタセクション -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="3Dデータを検索..."
+                />
+                <button id="searchBtn" class="btn btn-primary">検索</button>
+            </div>
+            
+            <div class="filter-container">
+                <label for="categoryFilter">カテゴリ:</label>
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">すべて</option>
+                    <option value="model">3Dモデル</option>
+                    <option value="texture">テクスチャ</option>
+                    <option value="material">マテリアル</option>
+                    <option value="animation">アニメーション</option>
+                    <option value="other">その他</option>
+                </select>
+
+                <label for="sortFilter">並び替え:</label>
+                <select id="sortFilter" class="filter-select">
+                    <option value="newest">新着順</option>
+                    <option value="popular">人気順</option>
+                    <option value="price-low">価格：低い順</option>
+                    <option value="price-high">価格：高い順</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- カート表示 -->
+        <div class="cart-header">
+            <button id="cartBtn" class="btn btn-secondary">
+                🛒 カート (<span id="cartCount">0</span>)
+            </button>
+            <div class="cart-total">合計: ¥<span id="cartTotal">0</span></div>
+        </div>
+
+        <!-- 商品リスト -->
+        <section class="products-section">
+            <div class="products-grid" id="productsGrid">
+                <!-- 商品はJavaScriptで動的に生成 -->
+                <div class="loading">読み込み中...</div>
+            </div>
+        </section>
+
+        <!-- カートモーダル -->
+        <div id="cartModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>ショッピングカート</h3>
+                    <button class="close-btn" id="closeCartBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems" class="cart-items">
+                        <!-- カートアイテムを動的に生成 -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart-summary">
+                        <div><strong>合計:</strong> ¥<span id="modalCartTotal">0</span></div>
+                    </div>
+                    <button id="checkoutBtn" class="btn btn-primary" disabled>
+                        チェックアウト
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 購入済みデータ表示 -->
+        <section class="purchases-section" id="purchasesSection" style="display: none;">
+            <h3>購入済みデータ</h3>
+            <div class="purchases-grid" id="purchasesGrid">
+                <!-- 購入済みデータを動的に生成 -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 新井智己</p>
+    </footer>
+
+    <!-- モーダル: ログイン/サインアップ -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="authModalTitle">ログイン</h3>
+                <button class="close-btn" id="closeAuthBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="authForm">
+                    <input 
+                        type="email" 
+                        id="authEmail" 
+                        class="form-input" 
+                        placeholder="メールアドレス" 
+                        required
+                    />
+                    <input 
+                        type="password" 
+                        id="authPassword" 
+                        class="form-input" 
+                        placeholder="パスワード" 
+                        required
+                    />
+                    <div id="authError" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary btn-full" id="authSubmitBtn">
+                        ログイン
+                    </button>
+                    <p class="toggle-auth">
+                        アカウントをお持ちでない場合は<a href="#signup">こちら</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル: 商品詳細 -->
+    <div id="productModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="productTitle"></h3>
+                <button class="close-btn" id="closeProductBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img id="productImage" src="" alt="商品画像" />
+                    </div>
+                    <div class="product-info">
+                        <p><strong>価格:</strong> ¥<span id="productPrice">0</span></p>
+                        <p><strong>カテゴリ:</strong> <span id="productCategory"></span></p>
+                        <p><strong>説明:</strong></p>
+                        <p id="productDescription"></p>
+                        <p><strong>評価:</strong> <span id="productRating">-</span> ⭐</p>
+                        <button id="addToCartBtn" class="btn btn-primary btn-large">
+                            カートに追加
+                        </button>
+                    </div>
+                </div>
+
+                <!-- レビューセクション -->
+                <div class="reviews-section">
+                    <h4>レビュー・評価</h4>
+                    <div id="reviewsList" class="reviews-list">
+                        <!-- レビューを動的に生成 -->
+                    </div>
+                    <div id="reviewForm" class="review-form" style="display: none;">
+                        <h5>レビューを投稿</h5>
+                        <select id="reviewRating" class="form-input">
+                            <option value="">評価を選択</option>
+                            <option value="5">⭐⭐⭐⭐⭐ 5つ星</option>
+                            <option value="4">⭐⭐⭐⭐ 4つ星</option>
+                            <option value="3">⭐⭐⭐ 3つ星</option>
+                            <option value="2">⭐⭐ 2つ星</option>
+                            <option value="1">⭐ 1つ星</option>
+                        </select>
+                        <textarea 
+                            id="reviewComment" 
+                            class="form-input" 
+                            placeholder="レビューを入力..."
+                            rows="4"
+                        ></textarea>
+                        <button id="submitReviewBtn" class="btn btn-primary">投稿</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル: Stripe支払い -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>支払い</h3>
+                <button class="close-btn" id="closePaymentBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-summary">
+                    <h4>注文内容</h4>
+                    <div id="paymentItems"></div>
+                    <div class="payment-total">
+                        <strong>合計: ¥<span id="paymentTotal">0</span></strong>
+                    </div>
+                </div>
+
+                <form id="paymentForm">
+                    <div id="card-element" style="border: 1px solid #e0e7ff; padding: 10px; margin: 15px 0; border-radius: 8px;"></div>
+                    <div id="card-errors" role="alert"></div>
+                    
+                    <input 
+                        type="email" 
+                        id="paymentEmail" 
+                        class="form-input" 
+                        placeholder="メールアドレス" 
+                        required
+                    />
+                    
+                    <input 
+                        type="text" 
+                        id="paymentName" 
+                        class="form-input" 
+                        placeholder="お支払い人名" 
+                        required
+                    />
+
+                    <button type="submit" class="btn btn-primary btn-full" id="paymentSubmitBtn">
+                        ¥<span id="paymentButtonAmount">0</span> を支払う
+                    </button>
+                    <p style="font-size: 0.9rem; color: #999; margin-top: 1rem; text-align: center;">
+                        テスト用カード: 4242 4242 4242 4242
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/market.js"></script>
+    <script src="../src/stripe-payment.js"></script>
+</body>
+</html>
